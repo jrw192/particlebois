@@ -4,12 +4,28 @@
 
 
 //form stuff
-let count = 1;
-let speed = 1;
+let count = 800;
+let speed = 2.0;
+
+initializeVals = () => {
+	console.log("initialize");
+	document.getElementById("count").value = count;
+	document.getElementById("speed").value = speed;
+	for(i = 0; i < count; i++) {
+		bois[i] = new createBoi();
+		bois[i].placeBoi();
+	}
+	render();
+}
 
 
 onCountClick = (event) => {
 	count = document.getElementById("count").value;
+	if(document.getElementById("count").max < count){
+		count = document.getElementById("count").max;
+		document.getElementById("count").value = count;
+	}
+
 	console.log(count);
 	while(scene.children.length > 0){ 
 	    scene.remove(scene.children[0]); 
@@ -22,6 +38,10 @@ onCountClick = (event) => {
 }
 onSpeedClick = (event) => {
 	speed = document.getElementById("speed").value;
+	if(document.getElementById("speed").max < count){
+		speed = document.getElementById("speed").max;
+		document.getElementById("speed").value = speed;
+	}
 	console.log(speed);
 }
 
@@ -31,7 +51,6 @@ countButton.addEventListener("click", onCountClick, false);
 
 var speedButton = document.getElementById("goSpeed");
 speedButton.addEventListener("click", onSpeedClick, false);
-
 
 
 
@@ -61,13 +80,17 @@ renderer.render (scene, camera);
 
 
 //FUN STUFF
+
+
+
 var group = new THREE.Group();
 scene.add(group);
+
 
 var bois = [];
 
 function createBoi() {
-	var geometry = new THREE.SphereGeometry(0.3,10,10);
+	var geometry = new THREE.CircleGeometry(0.3,10);
 	//var material = new THREE.MeshBasicMaterial({ color: 0xFFF3EF, wireframe:true} );
 	var material = new THREE.MeshBasicMaterial({ color: 'yellow'} );
 	var sphere = new THREE.Mesh(geometry, material);
@@ -125,6 +148,6 @@ render = () => {
 }
 
 
-
+initializeVals();
 
 
