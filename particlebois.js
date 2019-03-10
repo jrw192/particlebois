@@ -38,7 +38,7 @@ onCountClick = (event) => {
 }
 onSpeedClick = (event) => {
 	speed = document.getElementById("speed").value;
-	if(document.getElementById("speed").max < count){
+	if(document.getElementById("speed").max < speed){
 		speed = document.getElementById("speed").max;
 		document.getElementById("speed").value = speed;
 	}
